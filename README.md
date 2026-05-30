@@ -1,38 +1,16 @@
-# Raylib Tetris
+# Tetris (Raylib / C++)
 
-A Tetris clone built in C++ using [Raylib](https://www.raylib.com/). Made it as a learning project — classic gameplay, clean code, no dependencies beyond Raylib itself.
+Raylib öğreneyim diye başladım, sonunda elimde çalışan bir Tetris oldu. Harici bağımlılık yok, library'i CMake kendisi indiriyor, derleniyor, çalışıyor. Hepsi bu.
 
-## Screenshots
+## Ekran Görüntüleri
 
-| Start | Mid-game |
-|-------|----------|
-| ![Start](screenshots/gameplay-start.png) | ![Mid-game](screenshots/gameplay-mid.png) |
+| Başlarken | Biraz sonra |
+|-----------|-------------|
+| ![Başlarken](screenshots/gameplay-start.png) | ![Biraz sonra](screenshots/gameplay-mid.png) |
 
-## Controls
+## Nasıl Derlenir
 
-| Key | Action |
-|-----|--------|
-| ← → | Move left / right |
-| ↑ | Rotate clockwise |
-| ↓ | Soft drop |
-| Space | Hard drop |
-
-## Scoring
-
-Classic Tetris scoring, scales with level:
-
-| Lines cleared | Points |
-|---------------|--------|
-| 1 | 100 × level |
-| 2 | 300 × level |
-| 3 | 500 × level |
-| 4 (Tetris!) | 800 × level |
-
-Level increases every 1000 points. Pieces fall faster as you level up.
-
-## Building
-
-Requires **CMake 3.20+** and a C++17 compiler. Raylib is fetched automatically via CMake FetchContent — no manual install needed.
+CMake 3.20+ ve bir C++17 derleyicisi yeterli. Raylib'i ayrıca kurmana gerek yok, CMake ilk derlemede kendi indiriyor.
 
 ```bash
 git clone https://github.com/inkbytefo/raylib-tetris-example.git
@@ -41,23 +19,41 @@ cmake -B build
 cmake --build build
 ```
 
-Then run the executable from the `build` directory.
+İlk derleme biraz uzun sürebilir çünkü Raylib'i de derliyor. Sonraki derlemeler hızlı.
 
-> **Note:** First build downloads Raylib (~5 MB) and compiles it. This takes a couple of minutes — subsequent builds are fast.
+## Kontroller
 
-## Project Structure
+| Tuş | Ne yapar |
+|-----|----------|
+| ← → | Sağa / sola hareket |
+| ↑ | Döndür |
+| ↓ | Yavaşça aşağı |
+| Boşluk | Anında düşür |
+
+## Puanlama
+
+Klasik Tetris sistemi, seviyeyle çarpılıyor:
+
+- 1 satır → 100 × seviye
+- 2 satır → 300 × seviye
+- 3 satır → 500 × seviye
+- 4 satır (Tetris!) → 800 × seviye
+
+Her 1000 puanda seviye artıyor ve parçalar biraz daha hızlı düşmeye başlıyor. En hızlı noktada fark ediyorsun.
+
+## Yapı
 
 ```
 MyGame/
-├── main.cpp        # Entry point, window + game loop
-├── Game.cpp/h      # Core game logic, input, scoring
-├── Board.cpp/h     # 10×20 grid, line clearing
-├── Tetromino.cpp/h # Piece shapes, rotation
-└── Renderer.cpp/h  # Drawing with Raylib
+├── main.cpp        — pencere aç, döngüyü çalıştır
+├── Game.cpp/h      — oyun mantığı, input, skor/seviye
+├── Board.cpp/h     — 10×20 ızgara, satır temizleme
+├── Tetromino.cpp/h — 7 parça, 4 yönlü rotasyon
+└── Renderer.cpp/h  — çizim
 ```
 
-## Tech
+## Kullanılan Şeyler
 
-- **Language:** C++17
-- **Graphics:** [Raylib 5.5](https://github.com/raysan5/raylib)
-- **Build:** CMake with FetchContent
+- C++17
+- [Raylib 5.5](https://github.com/raysan5/raylib)
+- CMake (FetchContent ile Raylib)
